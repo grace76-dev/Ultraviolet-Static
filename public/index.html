@@ -2,27 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-    />
-    <title>Ultraviolet | Sophisticated Web Proxy</title>
-    <meta
-      name="description"
-      content="Ultraviolet is a highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers. Unblock sites today!"
-    />
-    <meta
-      name="keywords"
-      content="proxy, web proxy, ultraviolet, service workers, unblock websites, unblock chromebook, free web proxy, proxy list, proxy sites, un block chromebook, online proxy, proxy server, proxysite, proxy youtube, bypass securly, bypass iboss, bypass lightspeed filter, holy unblocker, chromebooks, titanium network, unblock youtube, youtube proxy, unblocked youtube, youtube unblocked"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#434c5e"
-    />
-    <meta name="googlebot" content="index, follow, snippet" />
-    <link rel="shortcut icon" content="favicon.ico" />
-    <link rel="stylesheet" href="index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>내 드라이브 - Google Drive</title> <!-- 탭 이름 위장 -->
+    <link rel="shortcut icon" href="https://ssl.gstatic.com/docs/doclist/images/infinite_drive_favicon_5.ico" />
+
+    <!-- [중요] 기존 엔진 스크립트들 (절대 지우면 안 됨) -->
     <script src="baremux/index.js" defer></script>
     <script src="epoxy/index.js" defer></script>
     <script src="uv/uv.bundle.js" defer></script>
@@ -30,93 +14,47 @@
     <script src="register-sw.js" defer></script>
     <script src="search.js" defer></script>
     <script src="index.js" defer></script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is Ultraviolet (Web Proxy)?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers and more!"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How do I unblock sites using Ultraviolet?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Simply head to an official site featuring Ultraviolet such as Holy Unblocker or Incognito! You can also self-host Ultraviolet on your own web server for maximum privacy."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What if Ultraviolet is blocked or not working?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Join the Titanium Network Discord at discord.gg/unblock!"
-            }
-          }
-        ]
-      }
-    </script>
+
+    <style>
+      body { margin: 0; font-family: 'Roboto', sans-serif; background-color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; color: #5f6368; }
+      .container { text-align: center; border: 1px solid #e0e0e0; padding: 50px; border-radius: 8px; }
+      img { width: 80px; margin-bottom: 20px; }
+      h1 { font-size: 22px; font-weight: 400; color: #202124; }
+      .btn { background-color: #1a73e8; color: white; border: none; padding: 12px 24px; border-radius: 4px; font-size: 14px; cursor: pointer; margin-top: 20px; }
+    </style>
   </head>
 
   <body>
-    <div
-      title="Ultraviolet Logo"
-      class="flex-center logo-wrapper header-center"
-    >
-      <img class="logo" src="uv.png" alt="Ultraviolet" />
-      <h1>Ultraviolet | TN</h1>
-    </div>
-    <div class="flex-center desc left-margin">
-      <p>
-        Ultraviolet is highly sophisticated proxy used for evading internet
-        censorship.
-      </p>
+    <!-- 선생님 모니터링에 보일 화면 -->
+    <div class="container">
+      <img src="https://www.gstatic.com/images/branding/product/2x/drive_2020q4_48dp.png" alt="Drive">
+      <h1>서버 연결 오류</h1>
+      <p>문서 서버와의 연결이 원활하지 않습니다. 수동으로 다시 시도하세요.</p>
+      <button class="btn" onclick="launchApp()">다시 시도</button>
     </div>
 
-    <form id="uv-form" class="flex-center">
-      <input
-        id="uv-search-engine"
-        value="https://www.google.com/search?q=%s"
-        type="hidden"
-      />
-      <input id="uv-address" type="text" placeholder="Search the web freely" />
-    </form>
-    <div class="desc left-margin">
-      <p id="uv-error"></p>
-      <pre id="uv-error-code"></pre>
-    </div>
-    <footer>
-      <div>
-        <a
-          title="The TitaniumNetwork GitHub organization"
-          href="https://github.com/titaniumnetwork-dev"
-          >TitaniumNetwork</a
-        >
-        <a title="The TitaniumNetwork Discord" href="https://discord.gg/unblock"
-          >Discord</a
-        >
-        <a
-          title="The TompHTTP GitHub organization"
-          href="https://github.com/tomphttp"
-          >TompHTTP</a
-        >
-        <a
-          title="The official deployment repository for Ultraviolet"
-          href="https://github.com/titaniumnetwork-dev/Ultraviolet-App"
-          >GitHub</a
-        >
-        <a title="License information" href="credits.html">Credits</a>
-      </div>
-      <div>
-        <span>Ultraviolet &copy; TN 2023</span>
-      </div>
-    </footer>
-    <iframe style="display: none;" id="uv-frame"></iframe>
-  </body>
-</html>
+    <script>
+      function launchApp() {
+        // [핵심] 인스타그램으로 연결되는 암호화된 경로 (Ultraviolet 전용)
+        // 님의 넷리파이 주소 뒤에 이 경로가 붙어야 진짜 인스타가 뜹니다.
+        var targetUrl = "/uv/service/hvtrs8%2F%2Fwww.instagraim.com%2F";
+
+        // 1. 고가디언이 절대 못 잡는 비밀 창(about:blank) 열기
+        var win = window.open('about:blank', '_blank');
+        if (!win) {
+            alert("팝업 차단을 해제해야 인스타그램이 열립니다!");
+            return;
+        }
+
+        // 2. 새 창의 탭을 구글 드라이브로 위장
+        var doc = win.document;
+        doc.title = "Google Drive";
+        var link = doc.createElement('link');
+        link.rel = 'icon';
+        link.href = 'https://ssl.gstatic.com/docs/doclist/images/infinite_drive_favicon_5.ico';
+        doc.head.appendChild(link);
+
+        // 3. 인스타그램을 보여주는 Iframe 삽입 (현재 넷리파이 서버 내의 엔진 활용)
+        var iframe = doc.createElement('iframe');
+        iframe.src = window.location.origin + targetUrl;
+        i
