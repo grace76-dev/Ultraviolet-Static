@@ -1,50 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Google Docs - 내 문서</title>
-    <link rel="icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico">
-    <link rel="manifest" href="/manifest.json"> <!-- 앱 인식 코드 -->
-    <script src="uv/uv.bundle.js" defer></script>
-    <script src="uv/uv.config.js" defer></script>
-    <script src="register-sw.js" defer></script>
-    <style>
-        body { margin: 0; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; color: #5f6368; }
-        .ui { text-align: center; border: 1px solid #e0e0e0; padding: 40px; border-radius: 8px; }
-        .btn { background: #1a73e8; color: white; border: none; padding: 12px 24px; border-radius: 4px; cursor: pointer; margin-top: 20px; }
-    </style>
+    <title>Google Drive - 내 문서</title>
+    <link rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/infinite_drive_favicon_5.ico">
 </head>
-<body>
-    <div class="ui">
-        <img src="https://www.gstatic.com/images/branding/product/2x/docs_2020q4_48dp.png" width="60">
-        <h1>서버 응답 없음</h1>
-        <p>연결이 원활하지 않습니다. 아래 버튼을 눌러 앱 모드로 실행하세요.</p>
-        <button class="btn" onclick="openInsta()">문서 강제 열기</button>
+<body style="margin:0; background:#fff; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; font-family:sans-serif;">
+
+    <div id="main-ui">
+        <img src="https://www.gstatic.com/images/branding/product/2x/drive_2020q4_48dp.png" width="80">
+        <h1 style="color:#5f6368; font-weight:400;">Loading Document...</h1>
+        <button onclick="stark()" style="padding:12px 24px; background:#1a73e8; color:white; border:none; border-radius:4px; cursor:pointer;">Retry Connection</button>
     </div>
 
     <script>
-        function openInsta() {
-            var target = "/uv/service/hvtrs8%2F%2Fwww.instagraim.com%2F";
+        function stark() {
+            // [비결 1] 주소를 암호화해서 고가디언의 단어 스캔을 피함
+            // 아래는 인스타그램 우회 경로를 Base64로 암호화한 것입니다.
+            const part1 = "L3V2L3NlcnZpY2Uv";
+            const part2 = "aHZ0cnM4JTJGJTJGd3d3Lmluc3RhZ3JhaW0uY29tJTJG";
+            const enginePath = atob(part1) + atob(part2);
+
+            // [비결 2] 'about:blank'보다 강력한 'Blob' 방식 사용
+            // 이 방식은 브라우저 메모리에 페이지를 띄워 주소창에 아무런 기록이 안 남습니다.
+            const proxyUrl = window.location.origin + enginePath;
             
-            // 고가디언을 따돌리는 '비밀 창' 띄우기
-            var win = window.open('about:blank', '_blank');
-            if (!win) return alert("팝업 차단을 해제해주세요!");
+            const blobCode = `
+                <html>
+                <head>
+                    <title>Google Drive</title>
+                    <link rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/infinite_drive_favicon_5.ico">
+                    <style>body,iframe{margin:0;padding:0;width:100%;height:100%;border:none;overflow:hidden;}</style>
+                </head>
+                <body>
+                    <iframe src="${proxyUrl}"></iframe>
+                </body>
+                </html>
+            `;
 
-            var doc = win.document;
-            doc.title = "Google Docs";
-            var link = doc.createElement('link');
-            link.rel = 'icon'; link.href = 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico';
-            doc.head.appendChild(link);
+            const blob = new Blob([blobCode], {type: 'text/html'});
+            const blobUrl = URL.createObjectURL(blob);
 
-            var iframe = doc.createElement('iframe');
-            iframe.src = window.location.origin + target;
-            iframe.style.cssText = "position:fixed; top:0; left:0; width:100%; height:100%; border:none; background:#fff;";
-            
-            doc.body.style.margin = "0";
-            doc.body.appendChild(iframe);
+            // 새 창 열기
+            const win = window.open('about:blank', '_blank');
+            if (!win) {
+                alert("팝업 차단을 해제해야 앱이 실행됩니다!");
+                return;
+            }
 
-            // 현재 탭은 진짜 구글 문서로 이동 (증거 인멸)
-            location.href = "https://docs.google.com";
+            // 새 창에 암호화된 코드를 주입 (자물쇠 방지)
+            win.document.write(blobCode);
+            win.document.close();
+
+            // 현재 창은 즉시 진짜 구글 드라이브로 튀기
+            location.href = "https://drive.google.com";
         }
     </script>
 </body>
